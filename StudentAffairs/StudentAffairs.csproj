@@ -67,43 +67,103 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmBehaviorList.cs">
+    <Compile Include="formData\frmBehaviorDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBehaviorList.Designer.cs">
+    <Compile Include="formData\frmBehaviorDetail.Designer.cs">
+      <DependentUpon>frmBehaviorDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formData\frmBehaviorList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formData\frmBehaviorList.Designer.cs">
       <DependentUpon>frmBehaviorList.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRegister.cs">
+    <Compile Include="formData\frmTeacherDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRegister.Designer.cs">
+    <Compile Include="formData\frmTeacherDetail.Designer.cs">
+      <DependentUpon>frmTeacherDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formData\frmUserDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formData\frmUserDetail.Designer.cs">
+      <DependentUpon>frmUserDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formData\frmUserList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formData\frmUserList.Designer.cs">
+      <DependentUpon>frmUserList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formAuth\frmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAuth\frmRegister.Designer.cs">
       <DependentUpon>frmRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="formAuth\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
+    <Compile Include="formAuth\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmStudentList.cs">
+    <Compile Include="formData\frmStudentDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmStudentList.Designer.cs">
+    <Compile Include="formData\frmStudentDetail.Designer.cs">
+      <DependentUpon>frmStudentDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formData\frmStudentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formData\frmStudentList.Designer.cs">
       <DependentUpon>frmStudentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formData\frmTeacherList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formData\frmTeacherList.Designer.cs">
+      <DependentUpon>frmTeacherList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formSetting\frmSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSetting\frmSetting.Designer.cs">
+      <DependentUpon>frmSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Module\authentication.cs" />
     <Compile Include="Module\database.cs" />
     <Compile Include="Module\register.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmRegister.resx">
+    <EmbeddedResource Include="formData\frmBehaviorDetail.resx">
+      <DependentUpon>frmBehaviorDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formData\frmUserList.resx">
+      <DependentUpon>frmUserList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formData\frmBehaviorList.resx">
+      <DependentUpon>frmBehaviorList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAuth\frmRegister.resx">
       <DependentUpon>frmRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="formAuth\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmStudentList.resx">
+    <EmbeddedResource Include="formData\frmStudentList.resx">
       <DependentUpon>frmStudentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSetting\frmSetting.resx">
+      <DependentUpon>frmSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

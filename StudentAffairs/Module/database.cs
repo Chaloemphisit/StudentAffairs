@@ -49,8 +49,9 @@ namespace StudentAffairs.Module {
             //MessageBox.Show(MyPath(Application.StartupPath));
 
             //ให้ต่อท้ายด้วยโฟลเดอร์ตำแหน่งของข้อมูลที่ต้องการ คือ  \Data\ไฟล์ข้อมูล MS Access
-            String strConn = "Provider = Microsoft.ACE.OLEDB.12.0;";
-            strConn += "Data Source = " + strPath + @"Database\Student.accdb";
+            String strConn = "Provider = Microsoft.ACE.OLEDB.12.0; ";
+                  strConn += "Data Source = " + strPath + @"Database\Student.accdb; ";
+                  strConn += @"Jet OLEDB:Database Password=123456789; ";
 
             OleDbConnection ConnDB = new OleDbConnection(strConn);
             //Create Connection

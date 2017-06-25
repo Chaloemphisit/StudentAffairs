@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StudentAffairs.formAuth;
 
 namespace StudentAffairs.Module {
     class register : database {
