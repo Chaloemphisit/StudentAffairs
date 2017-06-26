@@ -60,6 +60,8 @@ namespace StudentAffairs.formData {
             this.GGC.TabIndex = 71;
             this.GGC.UseRightToLeftCompatibleTextBox = true;
             this.GGC.VersionInfo = "15.2451.0.40";
+            this.GGC.TableControlCurrentCellActivated += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlEventHandler(this.GGC_TableControlCurrentCellActivated);
+            this.GGC.TableControlCellDoubleClick += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventHandler(this.GGC_TableControlCellDoubleClick);
             // 
             // ToolStripEx1
             // 
@@ -153,6 +155,7 @@ namespace StudentAffairs.formData {
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(23, 64);
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // lblRecordCount
             // 

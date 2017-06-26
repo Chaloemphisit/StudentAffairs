@@ -6,11 +6,14 @@ using System.Windows.Forms;
 //Using formAuth and formData
 using StudentAffairs.formAuth;
 using StudentAffairs.formData;
+using System.Threading;
 
 namespace StudentAffairs
 {
     static class Program
     {
+        static frmStudentList frmStudentList;
+        static frmWait frmWait;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,9 +22,12 @@ namespace StudentAffairs
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmLogin());
+            //Application.Run(new formAuth.frmLogin());
             //Application.Run(new frmRegister());
-            Application.Run(new formData.frmBehaviorList());
+            //Application.Run(new formData.frmBehaviorList());
+            Application.Run(new frmMain());
+
         }
+
     }
 }

@@ -16,6 +16,17 @@ using System.Windows.Forms;
 
 namespace StudentAffairs.formData {
     public partial class frmStudentDetail : Syncfusion.Windows.Forms.MetroForm {
+        public event EventHandler LoadCompleted;
+        protected override void OnLoad(EventArgs e) {
+            base.OnLoad(e);
+            this.OnLoadCompleted(EventArgs.Empty);
+        }
+        protected virtual void OnLoadCompleted(EventArgs e) {
+            var handler = LoadCompleted;
+            if (handler != null)
+                handler(this, e);
+        }
+
         public frmStudentDetail() {
             InitializeComponent();
         }

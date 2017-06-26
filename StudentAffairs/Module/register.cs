@@ -38,7 +38,6 @@ namespace StudentAffairs.Module {
             string[] RoleDesc = RoleDescList.ToArray();
             
             return RoleDesc;
-
         }
 
         public static void registerNewUser(string TeacherID, string TRole, string FirstName, string LastName, string Username, string Password, int UserRole) {

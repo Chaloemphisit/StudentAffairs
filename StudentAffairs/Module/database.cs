@@ -1,4 +1,5 @@
 ﻿
+using StudentAffairs.Properties;
 using System;
 using System.Data;
 using System.Data.OleDb;
@@ -43,15 +44,15 @@ namespace StudentAffairs.Module {
         }
 
 
-       public static OleDbConnection ConnectDB() {
+        public static OleDbConnection ConnectDB() {
 
             String strPath = MyPath(Application.StartupPath);
             //MessageBox.Show(MyPath(Application.StartupPath));
 
             //ให้ต่อท้ายด้วยโฟลเดอร์ตำแหน่งของข้อมูลที่ต้องการ คือ  \Data\ไฟล์ข้อมูล MS Access
             String strConn = "Provider = Microsoft.ACE.OLEDB.12.0; ";
-                  strConn += "Data Source = " + strPath + @"Database\Student.accdb; ";
-                  strConn += @"Jet OLEDB:Database Password=123456789; ";
+            strConn += "Data Source = " + strPath + @"Database\Student.accdb; ";
+            strConn += @"Jet OLEDB:Database Password=" + Settings.Default["dbPassword"] +"; ";
 
             OleDbConnection ConnDB = new OleDbConnection(strConn);
             //Create Connection
@@ -84,12 +85,13 @@ namespace StudentAffairs.Module {
 
             Cmd = new OleDbCommand();
             if (Conn.State == ConnectionState.Closed) Conn.Open();
+
             try {
                 Cmd.Connection = Conn;
                 Cmd.CommandType = CommandType.Text;
                 Cmd.CommandText = sql;
                 Cmd.ExecuteNonQuery();
-                if (showMsg) MessageBox.Show(msg, "Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (showMsg) MessageBox.Show(msg, "รายงานสถานะ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Cmd.Dispose();
                 return true;
             } catch (Exception e) {

@@ -59,5 +59,14 @@ namespace StudentAffairs.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello World from Resources.
+        /// </summary>
+        internal static string strTest {
+            get {
+                return ResourceManager.GetString("strTest", resourceCulture);
+            }
+        }
     }
 }

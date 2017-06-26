@@ -6,6 +6,8 @@
 // applicable laws. 
 #endregion
 using StudentAffairs.Module;
+using Syncfusion.Grouping;
+using Syncfusion.Windows.Forms;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Windows.Forms.Grid.Grouping;
 using System;
@@ -20,24 +22,27 @@ using System.Windows.Forms;
 
 namespace StudentAffairs.formData {
     public partial class frmBehaviorList : Syncfusion.Windows.Forms.MetroForm {
+        public event EventHandler LoadCompleted;
+        protected override void OnLoad(EventArgs e) {
+            base.OnLoad(e);
+            this.OnLoadCompleted(EventArgs.Empty);
+        }
+        protected virtual void OnLoadCompleted(EventArgs e) {
+            var handler = LoadCompleted;
+            if (handler != null)
+                handler(this, e);
+        }
+
         public frmBehaviorList() {
             InitializeComponent();
-            
-        }
-
-        private void frmBehaviorList_Load(object sender, EventArgs e) {
-            RetrieveData();
-        }
-
-        private void InitGridGroup() {
             //---------------------------------------------------------------------------------------
             // Grid Stacked Header Descriptor
 
-                    // Add any initialization after the InitializeComponent() call.
-                    GridStackedHeaderDescriptor shd1 = new GridStackedHeaderDescriptor("header1", "ข้อมูลทั้่วไป");
-                    GridStackedHeaderDescriptor shd2 = new GridStackedHeaderDescriptor("header2", "พฤติกรรม");
+            // Add any initialization after the InitializeComponent() call.
+            GridStackedHeaderDescriptor shd1 = new GridStackedHeaderDescriptor("header1", "ข้อมูลทั้่วไป");
+            GridStackedHeaderDescriptor shd2 = new GridStackedHeaderDescriptor("header2", "พฤติกรรม");
 
-                    shd1.VisibleColumns.AddRange(new GridStackedHeaderVisibleColumnDescriptor[] {
+            shd1.VisibleColumns.AddRange(new GridStackedHeaderVisibleColumnDescriptor[] {
                         new GridStackedHeaderVisibleColumnDescriptor("std_ID"),
                     new GridStackedHeaderVisibleColumnDescriptor("std_FirstName"),
                     new GridStackedHeaderVisibleColumnDescriptor("std_LastName"),
@@ -45,7 +50,7 @@ namespace StudentAffairs.formData {
                     new GridStackedHeaderVisibleColumnDescriptor("std_Room")
                     });
 
-                    shd2.VisibleColumns.AddRange(new GridStackedHeaderVisibleColumnDescriptor[] {
+            shd2.VisibleColumns.AddRange(new GridStackedHeaderVisibleColumnDescriptor[] {
                         new GridStackedHeaderVisibleColumnDescriptor("BehaviorDetail"),
                     new GridStackedHeaderVisibleColumnDescriptor("Implementation"),
                     new GridStackedHeaderVisibleColumnDescriptor("Realization"),
@@ -55,14 +60,23 @@ namespace StudentAffairs.formData {
                     new GridStackedHeaderVisibleColumnDescriptor("RecorderName")
                     });
 
-                    GridStackedHeaderRowDescriptor shrd = new GridStackedHeaderRowDescriptor("Row1", new GridStackedHeaderDescriptor[] { shd1, shd2 });
+            GridStackedHeaderRowDescriptor shrd = new GridStackedHeaderRowDescriptor("Row1", new GridStackedHeaderDescriptor[] { shd1, shd2 });
 
-                    // Step 4: Add the GridStackedRowHeaderDescriptor collection to the StackedHeaderRows
-                    GGC.TableDescriptor.StackedHeaderRows.Add(shrd);
+            // Step 4: Add the GridStackedRowHeaderDescriptor collection to the StackedHeaderRows
+            GGC.TableDescriptor.StackedHeaderRows.Add(shrd);
 
-                    // Display Stacked Headers 
-                    GGC.TopLevelGroupOptions.ShowStackedHeaders = true;
+            // Display Stacked Headers 
+            GGC.TopLevelGroupOptions.ShowStackedHeaders = true;
             //---------------------------------------------------------------------------------------
+        }
+
+        private void frmBehaviorList_Load(object sender, EventArgs e) {
+            //authentication.checkStatus();
+                RetrieveData();
+            
+        }
+
+        private void InitGridGroup() {
 
             // Initialize Columns GridGroup
 
@@ -92,7 +106,7 @@ namespace StudentAffairs.formData {
 
             //GridVerticalAlignment.Middle
             for (int i = 0; i < 15; i++) {
-                GGC.TableDescriptor.Columns[i].Appearance.AnyRecordFieldCell.VerticalAlignment = Syncfusion.Windows.Forms.Grid.GridVerticalAlignment.Middle;
+                GGC.TableDescriptor.Columns[i].Appearance.AnyRecordFieldCell.VerticalAlignment = GridVerticalAlignment.Middle;
                 GGC.TableDescriptor.Columns[i].AllowGroupByColumn = false;
                 // GGC.TableDescriptor.Columns[i].Appearance.AnyRecordFieldCell.AutoSize = AutoSize;
             }
@@ -107,10 +121,10 @@ namespace StudentAffairs.formData {
             GGC.TopLevelGroupOptions.ShowCaption = true;
 
             //Metro Styles
-            GGC.GridVisualStyles = Syncfusion.Windows.Forms.GridVisualStyles.Metro;
+            GGC.GridVisualStyles = GridVisualStyles.Metro;
 
             //Disables editing in GridGroupingControl
-            GGC.ActivateCurrentCellBehavior = Syncfusion.Windows.Forms.Grid.GridCellActivateAction.None;
+            GGC.ActivateCurrentCellBehavior = GridCellActivateAction.None;
 
             //Disable Add New
             GGC.TableDescriptor.AllowNew = false;
@@ -126,6 +140,7 @@ namespace StudentAffairs.formData {
 
             //Selection
             GGC.TableOptions.ListBoxSelectionMode = SelectionMode.One;
+            GGC.TableOptions.AllowSelection = GridSelectionFlags.AlphaBlend | GridSelectionFlags.Cell;
 
             //Selection Back color
             GGC.TableOptions.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
@@ -150,7 +165,7 @@ namespace StudentAffairs.formData {
             //Enabling Readonly for whole Grid
             GGC.TableModel.ReadOnly = true;
         }
-        private void RetrieveData(Boolean blnSearch = false) {
+        public void RetrieveData(Boolean blnSearch = false) {
             database.Conn = database.ConnectDB();
 
             database.strSQL =
@@ -193,6 +208,26 @@ namespace StudentAffairs.formData {
             //
             txtSearch.Clear();
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void GGC_TableControlCurrentCellActivated(object sender, GridTableControlEventArgs e) {
+        }
+
+        private void GGC_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e) {
+            //Notify the double click performed in a cell
+            Record rec = GGC.Table.DisplayElements[e.TableControl.CurrentCell.RowIndex].ParentRecord;
+            //If(rec) IsNot Nothing Then
+            if (rec != null) {
+                var frmBehaviorDetail = new frmBehaviorDetail();
+                frmBehaviorDetail.PK = (int)(rec.GetValue("PK"));
+                frmBehaviorDetail.editMode();
+                frmBehaviorDetail.Show();
+                //MessageBox.Show(frmBehaviorDetail.PK + "");
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e) {
+            RetrieveData();
         }
 
     }

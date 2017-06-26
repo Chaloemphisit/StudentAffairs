@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentAffairs.Properties;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -6,20 +7,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StudentAffairs.Module {
     class authentication : database {
 
-        private static string userID;
-
-        public static string UserID {
-            get{
-                return userID;
-            }
-            set {
-                userID = value;
-            }
-        }
 
         public static Boolean checkUser(String username,String password) {
             Conn = ConnectDB();
@@ -39,7 +31,10 @@ namespace StudentAffairs.Module {
             Boolean userFound=false;
             while (DR.Read()) {
                 userFound = true;
-                UserID = DR["UserID"].ToString();
+                //UserID = DR["UserID"].ToString();
+                Settings.Default["UserID"] = DR["UserID"].ToString();
+                Settings.Default["UserRole"] = DR["RoleID"].ToString();
+                Settings.Default.Save();
             }
             if (userFound) addLog();
 
@@ -55,8 +50,27 @@ namespace StudentAffairs.Module {
 
         private static void addLog() {
             strSQL = "INSERT INTO tblLog(UserID) " +
-                    "VALUES(" + UserID + ")";
+                    "VALUES(" + Settings.Default["UserID"] + ")";
             DoSQL(strSQL);
+        }
+
+        public static void signOut() {
+            Settings.Default["UserID"] = "";
+            Settings.Default["UserRole"] = "";
+        }
+
+        public static Boolean checkStatus() {
+            if (!(bool)Settings.Default["LoginStatus"]) {
+                
+                MessageBox.Show("กรุณาล็อกอินก่อนทำรายการ!", "ผิดพลาด",
+                                                   MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    var frmLogin = new formAuth.frmLogin();
+                    Application.OpenForms.Cast<Form>().Where(x => !(x is formAuth.frmLogin)).ToList().ForEach(x => x.Close());
+                    frmLogin.ShowDialog();
+                return false;
+            } else return true;
+
+            
         }
     }
 }

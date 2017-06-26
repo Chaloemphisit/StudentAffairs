@@ -47,7 +47,7 @@ namespace StudentAffairs.formAuth {
             this.txtUsername.BeforeTouchSize = new System.Drawing.Size(314, 30);
             this.txtUsername.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUsername.CornerRadius = 2;
+            this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUsername.Font = new System.Drawing.Font("Roboto Light", 13F);
             this.txtUsername.Location = new System.Drawing.Point(12, 86);
             this.txtUsername.Metrocolor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
@@ -57,6 +57,7 @@ namespace StudentAffairs.formAuth {
             this.txtUsername.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtUsername.TabIndex = 0;
             this.txtUsername.Text = "txtUsername";
+            this.txtUsername.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsername_KeyPress);
             // 
             // lblCaptionUserName
             // 
@@ -87,8 +88,7 @@ namespace StudentAffairs.formAuth {
             this.txtPassword.BeforeTouchSize = new System.Drawing.Size(314, 30);
             this.txtPassword.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPassword.CornerRadius = 2;
-            this.txtPassword.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtPassword.Font = new System.Drawing.Font("Roboto Light", 13F);
             this.txtPassword.Location = new System.Drawing.Point(12, 162);
             this.txtPassword.Metrocolor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
@@ -98,6 +98,7 @@ namespace StudentAffairs.formAuth {
             this.txtPassword.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtPassword.TabIndex = 18;
             this.txtPassword.Text = "txtPassword";
+            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             // 
             // btnSignin
             // 
