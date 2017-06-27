@@ -56,6 +56,9 @@
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="MetroProgressBar">
+      <HintPath>C:\Users\chalo\Desktop\officesplash_MetroProgressBar\MetroProgressBar.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Grid.Base, Version=15.2451.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.Grid.Grouping.Base, Version=15.2451.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.Grid.Grouping.Windows, Version=15.2451.0.40, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
@@ -95,6 +98,12 @@
     <Compile Include="formData\frmBehaviorList.Designer.cs">
       <DependentUpon>frmBehaviorList.cs</DependentUpon>
     </Compile>
+    <Compile Include="formData\frmStudentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formData\frmStudentDetail.Designer.cs">
+      <DependentUpon>frmStudentDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="formData\frmTeacherDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,12 +134,6 @@
     <Compile Include="formAuth\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="formData\frmStudentDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="formData\frmStudentDetail.Designer.cs">
-      <DependentUpon>frmStudentDetail.cs</DependentUpon>
-    </Compile>
     <Compile Include="formData\frmStudentList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,11 +146,17 @@
     <Compile Include="formData\frmTeacherList.Designer.cs">
       <DependentUpon>frmTeacherList.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="frmSplash.Designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTest.Designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
     <Compile Include="frmOptions.cs">
       <SubType>Form</SubType>
@@ -161,8 +170,15 @@
     <Compile Include="frmWait.Designer.cs">
       <DependentUpon>frmWait.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Module\authentication.cs" />
     <Compile Include="Module\database.cs" />
+    <Compile Include="Module\modFunction.cs" />
     <Compile Include="Module\register.cs" />
     <Compile Include="loadForm.cs" />
     <Compile Include="Program.cs" />
@@ -170,8 +186,17 @@
     <EmbeddedResource Include="formData\frmBehaviorDetail.resx">
       <DependentUpon>frmBehaviorDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formData\frmStudentDetail.resx">
+      <DependentUpon>frmStudentDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formData\frmTeacherDetail.resx">
+      <DependentUpon>frmTeacherDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formData\frmTeacherList.resx">
       <DependentUpon>frmTeacherList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formData\frmUserDetail.resx">
+      <DependentUpon>frmUserDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formData\frmUserList.resx">
       <DependentUpon>frmUserList.cs</DependentUpon>
@@ -188,14 +213,20 @@
     <EmbeddedResource Include="formData\frmStudentList.resx">
       <DependentUpon>frmStudentList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWait.resx">
       <DependentUpon>frmWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

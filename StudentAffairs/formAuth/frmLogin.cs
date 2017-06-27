@@ -19,7 +19,6 @@ namespace StudentAffairs.formAuth {
     public partial class frmLogin : Syncfusion.Windows.Forms.MetroForm {
         public frmLogin() {
             InitializeComponent();
-            authentication authen = new authentication();
         }
 
         private void frmLogin_Load(object sender, EventArgs e) {
@@ -31,7 +30,7 @@ namespace StudentAffairs.formAuth {
         private void btnSignin_Click(object sender, EventArgs e) {
             if (authentication.checkUser(txtUsername.Text, txtPassword.Text)) {
                 MessageBox.Show("Login Complete "+Settings.Default["UserID"]+" "+ Settings.Default["UserRole"]);
-
+                this.Hide();
             } else {
                 MessageBox.Show("Login failed!");
             }
@@ -51,6 +50,14 @@ namespace StudentAffairs.formAuth {
                 e.Handled = true;
                 btnSignin.PerformClick();
             }
+        }
+
+        private void buttonAdv1_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e) {
+            Application.Exit();
         }
     }
 }

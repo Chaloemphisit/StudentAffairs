@@ -80,7 +80,7 @@
             // 
             // Panel2
             // 
-            this.Panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.Panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.Panel2.Location = new System.Drawing.Point(-3, 255);
@@ -234,6 +234,7 @@
             this.btnCancle.Size = new System.Drawing.Size(120, 31);
             this.btnCancle.TabIndex = 66;
             this.btnCancle.Text = "ยกเลิก";
+            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
             // btnRegister
             // 
@@ -337,6 +338,7 @@
             this.ckbShowPwd.TabIndex = 62;
             this.ckbShowPwd.Text = "แสดงรหัสผ่าน";
             this.ckbShowPwd.ThemesEnabled = false;
+            this.ckbShowPwd.CheckStateChanged += new System.EventHandler(this.ckbShowPwd_CheckStateChanged);
             // 
             // ckbGeneratePwd
             // 
@@ -351,6 +353,7 @@
             this.ckbGeneratePwd.TabIndex = 63;
             this.ckbGeneratePwd.Text = "สร้างอัตโนมัติ";
             this.ckbGeneratePwd.ThemesEnabled = false;
+            this.ckbGeneratePwd.CheckStateChanged += new System.EventHandler(this.ckbGeneratePwd_CheckStateChanged);
             // 
             // ckbGenUsername
             // 

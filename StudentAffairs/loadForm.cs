@@ -11,29 +11,46 @@ using System.Threading;
 
 namespace StudentAffairs {
     class loadForm {
-        static frmWait frmWait;
+        frmWait frmWait;
+        Thread splashThread;
 
-        public static void showWaitForm(Form formCreator) {
-            //Show Wait Form
-           frmWait = new frmWait();
-            if (frmWait != null) {
-                Thread splashThread = new Thread(new ThreadStart(
-                    () => { Application.Run(frmWait); }));
-                splashThread.SetApartmentState(ApartmentState.STA);
-                splashThread.Start();
+        private static Boolean eventComplt = false;
+
+        public static Boolean eventCompleted {
+            get { return eventComplt; }
+            set { eventComplt = value; }
+        }
+        
+
+
+        public void showWaitForm(Form formCreator) {
+            //check Login Status
+            if (Module.authentication.checkStatus()) {
+                //Show Wait Form
+                frmWait = new frmWait();
+                if (frmWait != null) {
+                     splashThread = new Thread(new ThreadStart(
+                        () => { frmWait.ShowDialog(); }));//Application.Run(frmWait);
+                    splashThread.SetApartmentState(ApartmentState.STA);
+                    splashThread.Start();
+                }
+
+                formCreator.Load += frm_LoadCompleted;
+                //Application.Run(formCreator);
+                formCreator.Show();
+
+            } else {
+                Application.OpenForms.Cast<Form>().Where(x => !(x is formAuth.frmLogin)).ToList().ForEach(x => x.Close());
             }
-
-            formCreator.Load += frm_LoadCompleted;
-            formCreator.Show();
-            formCreator.Activate();
         }
 
-        public static void frm_LoadCompleted(object sender, EventArgs e) {
-            if (frmWait == null || frmWait.Disposing || frmWait.IsDisposed)
-                return;
+        public void frm_LoadCompleted(object sender, EventArgs e) {
+            if (frmWait == null || frmWait.Disposing || frmWait.IsDisposed) return;
             frmWait.Invoke(new Action(() => { frmWait.Close(); }));
             frmWait.Dispose();
+            //frmWait.Close();
             frmWait = null;
+            //splashThread.Abort();
             //frmWait.Activate();
         }
     }

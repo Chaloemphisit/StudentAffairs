@@ -19,5 +19,16 @@ namespace StudentAffairs.formData {
         public frmUserDetail() {
             InitializeComponent();
         }
+
+        private void btnReset_Click(object sender, EventArgs e) {
+            DialogResult result = MessageBox.Show("ท่านต้องการรีเซ็ทรหัสผ่านใช่หรือไม่","ยืนยันการทำรายการ",MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1);
+            if (result == DialogResult.Yes) {
+                txtPassword.Text = "";
+                txtPassword.Enabled = true;
+                ckbGeneratePwd.Visible = true;
+                ckbShowPwd.Visible = true;
+            }
+            
+        }
     }
 }

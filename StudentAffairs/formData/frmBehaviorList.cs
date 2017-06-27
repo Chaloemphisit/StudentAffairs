@@ -34,6 +34,7 @@ namespace StudentAffairs.formData {
         }
 
         public frmBehaviorList() {
+
             InitializeComponent();
             //---------------------------------------------------------------------------------------
             // Grid Stacked Header Descriptor
@@ -71,9 +72,8 @@ namespace StudentAffairs.formData {
         }
 
         private void frmBehaviorList_Load(object sender, EventArgs e) {
-            //authentication.checkStatus();
-                RetrieveData();
-            
+            if (authentication.checkStatus()) RetrieveData();
+            else Application.Exit();
         }
 
         private void InitGridGroup() {
@@ -132,6 +132,13 @@ namespace StudentAffairs.formData {
             //Autofit Columns
             //GGC.AllowProportionalColumnSizing = true;
 
+            //Column Width
+            GGC.TableDescriptor.Columns["std_FirstName"].Width = 150;
+            GGC.TableDescriptor.Columns["std_LastName"].Width = 150;
+            GGC.TableDescriptor.Columns["BehaviorDetail"].Width = 200;
+            GGC.TableDescriptor.Columns["Implementation"].Width = 200;
+            GGC.TableDescriptor.Columns["BehaviorDetail"].Width = 200;
+
             //Row Height
             GGC.Table.DefaultRecordRowHeight = 25;
             //
@@ -157,7 +164,7 @@ namespace StudentAffairs.formData {
             GGC.TopLevelGroupOptions.ShowGroupHeader = false; // true
 
             //Will enable the Group Footer for the group.
-            GGC.TopLevelGroupOptions.ShowGroupFooter = true; //true
+            GGC.TopLevelGroupOptions.ShowGroupFooter = false; //true
             //
             GGC.TableOptions.GroupHeaderSectionHeight = 30;
             GGC.TableOptions.GroupFooterSectionHeight = 30;

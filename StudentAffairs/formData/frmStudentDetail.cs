@@ -5,10 +5,12 @@
 // licensing@syncfusion.com. Any infringement will be prosecuted under
 // applicable laws. 
 #endregion
+using StudentAffairs.Module;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 
 using System.Text;
@@ -16,7 +18,8 @@ using System.Windows.Forms;
 
 namespace StudentAffairs.formData {
     public partial class frmStudentDetail : Syncfusion.Windows.Forms.MetroForm {
-        public event EventHandler LoadCompleted;
+        public static event EventHandler LoadCompleted;
+
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
             this.OnLoadCompleted(EventArgs.Empty);
@@ -30,5 +33,10 @@ namespace StudentAffairs.formData {
         public frmStudentDetail() {
             InitializeComponent();
         }
+
+        private void frmStudentDetail_Load(object sender, EventArgs e) {
+            
+        }
+
     }
 }

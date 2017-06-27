@@ -24,14 +24,18 @@ namespace StudentAffairs {
         private void frmWait_Load(object sender, EventArgs e) {
             timer1.Enabled = true;
             timer1.Start();
+            timer1.Interval = 100;
             timer1.Tick += new EventHandler(timer1_Tick);
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            if (progressBarAdv1.Value != 100) {
-                progressBarAdv1.Value+=2;
+            if (!loadForm.eventCompleted) {
+                if (this.progressBarAdv1.Value < 100)
+                    this.progressBarAdv1.Value += 1;
+                else
+                    progressBarAdv1.Value = 0;
             } else {
-                timer1.Stop();
+                this.progressBarAdv1.Value = 100;
             }
         }
     }

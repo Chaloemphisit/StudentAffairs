@@ -140,6 +140,7 @@ namespace StudentAffairs.formAuth {
             this.buttonAdv1.Size = new System.Drawing.Size(101, 33);
             this.buttonAdv1.TabIndex = 25;
             this.buttonAdv1.Text = "ยกเลิก";
+            this.buttonAdv1.Click += new System.EventHandler(this.buttonAdv1_Click);
             // 
             // frmLogin
             // 
@@ -166,6 +167,7 @@ namespace StudentAffairs.formAuth {
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "เข้าสู่ระบบ";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmLogin_FormClosed);
             this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword)).EndInit();

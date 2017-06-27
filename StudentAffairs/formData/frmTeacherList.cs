@@ -19,5 +19,9 @@ namespace StudentAffairs.formData {
         public frmTeacherList() {
             InitializeComponent();
         }
+
+        private void frmTeacherList_Load(object sender, EventArgs e) {
+
+        }
     }
 }

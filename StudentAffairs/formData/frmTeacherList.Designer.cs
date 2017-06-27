@@ -182,6 +182,7 @@ namespace StudentAffairs.formData {
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "รายชื่อครู";
+            this.Load += new System.EventHandler(this.frmTeacherList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GGC)).EndInit();
             this.ToolStripEx1.ResumeLayout(false);
             this.ToolStripEx1.PerformLayout();

@@ -14,28 +14,38 @@ using System.Data.OleDb;
 using System.Drawing;
 
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace StudentAffairs.formData {
     public partial class frmStudentList : Syncfusion.Windows.Forms.MetroForm {
 
-        public event EventHandler LoadCompleted;
+        public static event EventHandler LoadCompleted;
+
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
             this.OnLoadCompleted(EventArgs.Empty);
         }
         protected virtual void OnLoadCompleted(EventArgs e) {
             var handler = LoadCompleted;
-            if (handler != null)
-                handler(this, e);
+            if (handler != null) handler(this, e);
+            loadForm.eventCompleted = true;    
+
         }
 
         public frmStudentList() {
+            frmWait frmWait = new frmWait();
+            Thread splashThread = new Thread(new ThreadStart(
+                    () => { Application.Run(frmWait); }));
+            splashThread.SetApartmentState(ApartmentState.STA);
+            splashThread.Start();
             InitializeComponent();
+            RetrieveData();
+            splashThread.Abort();
         }
 
         private void frmStudentList_Load(object sender, EventArgs e) {
-            RetrieveData();
+            
         }
 
 
@@ -127,7 +137,7 @@ namespace StudentAffairs.formData {
             GGC.TableModel.ReadOnly = true;
         }
 
-        private void RetrieveData(Boolean blnSearch = false) {
+        void RetrieveData(Boolean blnSearch = false) {
             database.Conn = database.ConnectDB();
 
             database.strSQL =

@@ -30,6 +30,10 @@ namespace StudentAffairs.formData {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.SuspendLayout();
+            // 
+            // frmTeacherDetail
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
@@ -43,10 +47,13 @@ namespace StudentAffairs.formData {
             this.ForeColor = System.Drawing.Color.DimGray;
             this.MetroColor = System.Drawing.Color.Transparent;
             this.MinimizeBox = false;
+            this.Name = "frmTeacherDetail";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.ResumeLayout(false);
             this.Text = "MetroForm1";
+            this.Load += new System.EventHandler(this.frmTeacherDetail_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

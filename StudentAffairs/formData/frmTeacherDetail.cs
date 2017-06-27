@@ -5,10 +5,12 @@
 // licensing@syncfusion.com. Any infringement will be prosecuted under
 // applicable laws. 
 #endregion
+using StudentAffairs.Module;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 
 using System.Text;
@@ -19,5 +21,10 @@ namespace StudentAffairs.formData {
         public frmTeacherDetail() {
             InitializeComponent();
         }
+
+        private void frmTeacherDetail_Load(object sender, EventArgs e) {
+            
+        }
+
     }
 }

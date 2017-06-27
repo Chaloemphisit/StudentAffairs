@@ -44,5 +44,22 @@ namespace StudentAffairs.formAuth {
         private void btnRegister_Click(object sender, EventArgs e) {
             register.registerNewUser(txtTeacherID.Text, txtTRole.Text, txtFirstName.Text, txtLastName.Text,txtUsername.Text,txtPassword.Text,cbUserRole.SelectedIndex);
         }
+
+        private void btnCancle_Click(object sender, EventArgs e) {
+            this.Dispose();
+        }
+
+        private void ckbGeneratePwd_CheckStateChanged(object sender, EventArgs e) {
+            if (ckbGeneratePwd.Checked = true) {
+                txtPassword.Text = modFunction.passwordGen();
+            }
+        }
+
+        private void ckbShowPwd_CheckStateChanged(object sender, EventArgs e) {
+            if (ckbShowPwd.Checked = true) {
+                txtPassword.PasswordChar = char.Parse("•");
+
+            }
+        }
     }
 }
