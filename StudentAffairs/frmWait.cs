@@ -20,7 +20,13 @@ namespace StudentAffairs {
 
         public frmWait() {
             InitializeComponent();
+            captionLoad();
         }
+
+        public void captionLoad(string msg="Loading...") {
+            label1.Text = msg;
+        }
+
         private void frmWait_Load(object sender, EventArgs e) {
             timer1.Enabled = true;
             timer1.Start();

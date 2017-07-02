@@ -76,5 +76,18 @@ namespace StudentAffairs.Properties {
                 this["LoginStatus"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dsn=Student;dbq=F:\\Student Affiars[DesktopApp]\\StudentAffairs\\StudentAffairs\\Data" +
+            "base\\Student.accdb;defaultdir=F:\\Student Affiars[DesktopApp]\\StudentAffairs\\Stud" +
+            "entAffairs\\Database;driverid=25;fil=MS Access;maxbuffersize=2048;pagetimeout=5;u" +
+            "id=admin")]
+        public string ConnectionString {
+            get {
+                return ((string)(this["ConnectionString"]));
+            }
+        }
     }
 }

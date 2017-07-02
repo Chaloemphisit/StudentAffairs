@@ -23,5 +23,9 @@ namespace StudentAffairs {
         private void progressbar1_Load(object sender, EventArgs e) {
 
         }
+
+        private void frmSplash_Load(object sender, EventArgs e) {
+            
+        }
     }
 }

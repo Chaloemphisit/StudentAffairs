@@ -15,6 +15,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using StudentAffairs.formData;
+using StudentAffairs.formAuth;
+using StudentAffairs.Module;
+using System.Linq;
+
 namespace StudentAffairs {
     public partial class frmMain : RibbonForm {
         public static event EventHandler LoadCompleted;
@@ -34,19 +38,46 @@ namespace StudentAffairs {
         }
 
         private void frmMain_Load(object sender, EventArgs e) {
-            frmStudentList frmStudentList = new frmStudentList();
-            frmStudentList.MdiParent = this;
-            frmStudentList.Show();
-            //loadForm.showWaitForm(frmStudentList);
-            //loadForm.showWaitForm()
-
-
 
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e) {
 
         }
+
+        private void btnClose_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void btnSignout_Click(object sender, EventArgs e) {
+            authentication authentication = new authentication();
+            authentication.signOut();
+        }
+
+        private void btnStdList_Click(object sender, EventArgs e) {
+            openChildForm(new frmStudentList());
+        }
+
+        private void btnOpenBehavior_Click(object sender, EventArgs e) {
+            new frmBehaviorDetail().ShowDialog();
+        }
+
+        private void btnMUser_Click(object sender, EventArgs e) {
+                new frmRegister().ShowDialog();
+        }
+        private void btnOpenDataManagemet_Click(object sender, EventArgs e) {
+            openChildForm(new frmUserList());
+        }
+
+        //Open Child form
+        void openChildForm(Form frmChild) {
+            if (ActiveMdiChild != null) ActiveMdiChild.Hide();
+            frmChild.MdiParent = this;
+            frmChild.Show();
+        }
+
+        private void ToolStripButton3_Click(object sender, EventArgs e) {
+            openChildForm(new frmBehaviorList());
+        }
     }
 }
- 

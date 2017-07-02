@@ -46,6 +46,7 @@
             this.ckbShowPwd = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
             this.ckbGeneratePwd = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
             this.ckbGenUsername = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTeacherID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbUserRole)).BeginInit();
@@ -56,6 +57,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ckbShowPwd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbGeneratePwd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbGenUsername)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLastName
@@ -77,6 +79,7 @@
             this.txtLastName.Text = "txtLastName";
             this.txtLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLastName.WordWrap = false;
+            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
             // 
             // Panel2
             // 
@@ -108,6 +111,7 @@
             this.txtTeacherID.Text = "txtTeacherID";
             this.txtTeacherID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtTeacherID.WordWrap = false;
+            this.txtTeacherID.Validating += new System.ComponentModel.CancelEventHandler(this.txtTeacherID_Validating);
             // 
             // Label7
             // 
@@ -137,6 +141,7 @@
             this.cbUserRole.Text = "กรุณาเลือก";
             this.cbUserRole.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cbUserRole.UseMetroButtonColor = true;
+            this.cbUserRole.Validating += new System.ComponentModel.CancelEventHandler(this.cbUserRole_Validating);
             // 
             // txtPassword
             // 
@@ -158,6 +163,7 @@
             this.txtPassword.Text = "txtPassword";
             this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPassword.WordWrap = false;
+            this.txtPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtPassword_Validating);
             // 
             // txtUsername
             // 
@@ -178,6 +184,7 @@
             this.txtUsername.Text = "txtUsername";
             this.txtUsername.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtUsername.WordWrap = false;
+            this.txtUsername.Validating += new System.ComponentModel.CancelEventHandler(this.txtUsername_Validating);
             // 
             // txtTRole
             // 
@@ -198,6 +205,7 @@
             this.txtTRole.Text = "txtTRole";
             this.txtTRole.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtTRole.WordWrap = false;
+            this.txtTRole.Validating += new System.ComponentModel.CancelEventHandler(this.txtTRole_Validating);
             // 
             // txtFirstName
             // 
@@ -218,6 +226,7 @@
             this.txtFirstName.Text = "txtFirstName";
             this.txtFirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtFirstName.WordWrap = false;
+            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
             // 
             // btnCancle
             // 
@@ -369,6 +378,11 @@
             this.ckbGenUsername.Text = "สร้างอัตโนมัติ";
             this.ckbGenUsername.ThemesEnabled = false;
             // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.AlwaysBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
             // frmRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -421,6 +435,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ckbShowPwd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbGeneratePwd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbGenUsername)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -448,6 +463,7 @@
         private Syncfusion.Windows.Forms.Tools.CheckBoxAdv ckbGenUsername;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt txtTeacherID;
         public Syncfusion.Windows.Forms.Tools.ComboBoxAdv cbUserRole;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
 

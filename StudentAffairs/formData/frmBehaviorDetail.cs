@@ -7,6 +7,7 @@
 #endregion
 using StudentAffairs.Module;
 using StudentAffairs.Properties;
+using Syncfusion.Windows.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,7 @@ namespace StudentAffairs.formData {
                 handler(this, e);
         }
 
-        public static Boolean newData = true;
+        private static Boolean newData = true;
         public static int PK;
 
         public frmBehaviorDetail() {
@@ -63,11 +64,11 @@ namespace StudentAffairs.formData {
                 database.DR = database.Cmd.ExecuteReader();
                 while (database.DR.Read()) {
                     cbType.Items.Add(database.DR["Type"].ToString());
-                    // MessageBox.Show(database.DR["Type"].ToString());
+                    // MessageBox(database.DR["Type"].ToString());
                 }
                 database.DR.Close();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBoxAdv.Show(ex.Message);
             }
         }
 
@@ -80,7 +81,8 @@ namespace StudentAffairs.formData {
             btnDelete.Enabled = false;
             txtStudentID.Focus();
             txtStudentID.ReadOnly = false;
-            btnRefresh.Enabled = true;
+            btnRefresh.Visible = true;
+
         }
 
         public void editMode() {
@@ -89,7 +91,7 @@ namespace StudentAffairs.formData {
             btnDelete.Enabled = true;
             txtStudentID.BackColor = Color.SeaShell;
             txtStudentID.ReadOnly = true;
-            btnRefresh.Enabled = false;
+            btnRefresh.Visible = false;
         }
 
         private void clsForm() {
@@ -112,11 +114,11 @@ namespace StudentAffairs.formData {
                 "tblStudent.std_LastName, tblStudent.std_Class, tblStudent.std_Room, " +
                 "tblBehavior.BehaviorDetail, tblBehavior.Implementation, " +
                 "tblBehavior.Realization, tblBehavior.CreateAt, " +
-                "[tblTeacher].[TeacherFirstName] + ' ' + [TeacherLastName] AS RecorderName, " +
-                "tblBehavior.RecorderID, tblBehavior.BehaviorType, tblBehavior.UpdateAt " +
+                "[tblTeacher].[TeacherFirstName] + ' ' + [TeacherLastName] AS TeacherName, " +
+                "tblBehavior.TeacherID, tblBehavior.BehaviorType, tblBehavior.UpdateAt " +
                 "FROM tblTeacher INNER JOIN (tblStudent INNER JOIN tblBehavior " +
                 "ON tblStudent.std_ID = tblBehavior.std_ID) " +
-                "ON tblTeacher.TeacherID = tblBehavior.RecorderID " +
+                "ON tblTeacher.TeacherID = tblBehavior.TeacherID " +
                 "WHERE (((tblBehavior.PK)=" + PK + "))";
 
             try {
@@ -137,21 +139,22 @@ namespace StudentAffairs.formData {
                     txtRealization.Text = database.DR["Realization"].ToString();
                     cbType.SelectedIndex = ((int) database.DR["BehaviorType"])-1;
                     DateTimePicker.BindableValue = database.DR["UpdateAt"];
-                    txtRecorderName.Text = database.DR["RecorderName"].ToString();
+                    txtRecorderName.Text = database.DR["TeacherID"].ToString();
 
                 }
                 database.DR.Close();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBoxAdv.Show(ex.Message);
             }
         }
+
         //Retrieve Recorder Name to txtRecorderName
         private void RetrieveRCName() {
             database.Conn = database.ConnectDB();
 
-            database.strSQL = "SELECT [tblTeacher].[TeacherFirstName] & ' ' & [TeacherLastName] AS RecorderName, " +
-                    "tblUser.UserID FROM tblTeacher INNER JOIN tblUser ON tblTeacher.TeacherID = tblUser.UserID " +
-                    "WHERE tblUser.UserID = " + Settings.Default["UserID"];
+            database.strSQL = "SELECT [tblTeacher].[TeacherFirstName] & ' ' & [TeacherLastName] AS TeacherName, " +
+                    "tblUser.TeacherID FROM tblTeacher INNER JOIN tblUser ON tblTeacher.TeacherID = tblUser.TeacherID " +
+                    "WHERE tblUser.TeacherID = " + Settings.Default["UserID"];
 
             try {
                 database.Cmd = new OleDbCommand();
@@ -161,11 +164,11 @@ namespace StudentAffairs.formData {
                 database.Cmd.CommandText = database.strSQL;
                 database.DR = database.Cmd.ExecuteReader();
                 while (database.DR.Read()) {
-                    txtRecorderName.Text = database.DR["RecorderName"].ToString();
+                    txtRecorderName.Text = database.DR["TeacherName"].ToString();
                 }
                 database.DR.Close();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBoxAdv.Show(ex.Message);
             }
         }
 
@@ -192,14 +195,14 @@ namespace StudentAffairs.formData {
                     txtClass.Text = database.DR["std_Class"].ToString();
                     txtRoom.Text = database.DR["std_Room"].ToString();
                 }
-                if (!result) MessageBox.Show("ไม่พบรายชื่อนี้ กรุณาลองใหม่อีกครั้ง", "รายงานสถานะ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!result) MessageBoxAdv.Show("ไม่พบรายชื่อนี้ กรุณาลองใหม่อีกครั้ง", "รายงานสถานะ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
                     btnSave.Enabled = true;
                     txtDetail.Select();
                 }
                database.DR.Close();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBoxAdv.Show(ex.Message);
             }
 
             
@@ -221,10 +224,10 @@ namespace StudentAffairs.formData {
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
-            if (string.IsNullOrWhiteSpace(txtStudentID.Text) || string.IsNullOrWhiteSpace(txtStudentFirstName.Text)
-                || string.IsNullOrWhiteSpace(txtDetail.Text) || string.IsNullOrWhiteSpace(txtImplementation.Text)
-                || string.IsNullOrWhiteSpace(txtRealization.Text) || cbType.SelectedIndex < 0) {
-                MessageBox.Show("กรุณาระบุรายละเอียดให้เรียบร้อยด้วย.", "รายงานความผิดพลาด",
+            if (modFunction.validNullTxt(txtStudentID, errorProvider) || modFunction.validNullTxt(txtDetail, errorProvider)
+                || modFunction.validNullTxt(txtImplementation, errorProvider) || modFunction.validNullTxt(txtRealization, errorProvider)
+                || modFunction.validNotSelectCB(cbType, errorProvider)) {
+                MessageBoxAdv.Show("กรุณากรอกข้อมูลให้เรียบร้อยก่อนทำรายการ.", "รายงานความผิดพลาด",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             } else {
@@ -233,7 +236,7 @@ namespace StudentAffairs.formData {
                 if (newData) {
                     database.strSQL = "INSERT INTO tblBehavior(" +
                 "std_ID, BehaviorDetail, Implementation, Realization, " +
-                "BehaviorType, RecorderID, CreateAt,UpdateAt) " +
+                "BehaviorType, TeacherID, CreateAt,UpdateAt) " +
                 "VALUES(" +
                 " " + txtStudentID.Text + "," +
                 "'" + txtDetail.Text + "'," +
@@ -256,12 +259,26 @@ namespace StudentAffairs.formData {
                         " Implementation='" + txtImplementation.Text + "', " +
                         " Realization='" + txtRealization.Text + "', " +
                         " BehaviorType=" + (cbType.SelectedIndex + 1) + ", " +
-                        " RecorderID=" + Settings.Default["UserID"] + ", " +
+                        " TeacherID=" + Settings.Default["UserID"] + ", " +
                         " UpdateAt='" + DateTimePicker.Value + "' " +
                         " WHERE PK=" + PK + "";    // ค่า PK จะได้มาจากการดับเบิ้ลคลิ๊กเลือกรายการแก้ไขเอาไว้แล้วล่วงหน้า
                 if (database.DoSQL(database.strSQL, "แก้ไขข้อมูลเรียบร้อย", true)) Close();
                 }
 
+            }
+        }
+
+        public void deleteData() {
+            DialogResult Result = MessageBoxAdv.Show("คุณต้องการการลบข้อมูลของ " + txtStudentID.Text + " "
+                    + txtStudentFirstName.Text + " " + txtStudentLastName.Text + " ใช่หรือไม่ ?", "ยืนยันการลบข้อมูล",
+                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (Result == DialogResult.Yes) {
+                database.strSQL = "DELETE FROM tblBehavior WHERE PK = " + PK;
+                if (database.DoSQL(database.strSQL, "ลบข้อมูลเรียบร้อย", true)) {
+                    var frmBehaviorList = new frmBehaviorList();
+                    frmBehaviorList.RetrieveData();
+                    Close();
+                }
             }
         }
 
@@ -275,17 +292,36 @@ namespace StudentAffairs.formData {
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {
-            DialogResult Result = MessageBox.Show("คุณต้องการการลบข้อมูลของ " + txtStudentID.Text + " " 
-                    + txtStudentFirstName.Text + " " + txtStudentLastName.Text + " ใช่หรือไม่ ?", "ยืนยันการลบข้อมูล",
-                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if(Result == DialogResult.Yes) {
-                database.strSQL = "DELETE FROM tblBehavior WHERE PK = " + PK;
-                if (database.DoSQL(database.strSQL, "ลบข้อมูลเรียบร้อย", true)) {
-                    var frmBehaviorList = new frmBehaviorList();
-                    frmBehaviorList.RetrieveData();
-                    Close();
-                }
-            }
+            deleteData();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e) {
+            RetrieveStdData(txtStudentID.Text);
+        }
+
+        private void txtStudentID_Validating(object sender, CancelEventArgs e) {
+            //Check Validateing IsNullText
+            modFunction.validNullTxt(txtStudentID, errorProvider);
+        }
+
+        private void txtDetail_Validating(object sender, CancelEventArgs e) {
+            //Check Validateing IsNullText
+            modFunction.validNullTxt(txtDetail, errorProvider);
+        }
+
+        private void txtImplementation_Validating(object sender, CancelEventArgs e) {
+            //Check Validateing IsNullText
+            modFunction.validNullTxt(txtImplementation, errorProvider);
+        }
+
+        private void txtRealization_Validating(object sender, CancelEventArgs e) {
+            //Check Validateing IsNullText
+            modFunction.validNullTxt(txtRealization, errorProvider);
+        }
+
+        private void cbType_Validating(object sender, CancelEventArgs e) {
+            //Check Validateing IsNullText
+            modFunction.validNotSelectCB(cbType, errorProvider);
         }
     }
 }

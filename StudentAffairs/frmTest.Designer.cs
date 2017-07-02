@@ -37,8 +37,6 @@ namespace StudentAffairs {
             this.BehaviorList = new Syncfusion.Windows.Forms.ButtonAdv();
             this.UserDetail = new Syncfusion.Windows.Forms.ButtonAdv();
             this.UserList = new Syncfusion.Windows.Forms.ButtonAdv();
-            this.TeacherDetail = new Syncfusion.Windows.Forms.ButtonAdv();
-            this.TeacherList = new Syncfusion.Windows.Forms.ButtonAdv();
             this.Login = new Syncfusion.Windows.Forms.ButtonAdv();
             this.Logout = new Syncfusion.Windows.Forms.ButtonAdv();
             this.btnOptions = new Syncfusion.Windows.Forms.ButtonAdv();
@@ -54,7 +52,7 @@ namespace StudentAffairs {
             this.StudentList.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.StudentList.ForeColor = System.Drawing.Color.White;
             this.StudentList.IsBackStageButton = false;
-            this.StudentList.Location = new System.Drawing.Point(40, 39);
+            this.StudentList.Location = new System.Drawing.Point(65, 68);
             this.StudentList.Name = "StudentList";
             this.StudentList.Size = new System.Drawing.Size(136, 44);
             this.StudentList.TabIndex = 25;
@@ -71,7 +69,7 @@ namespace StudentAffairs {
             this.StudentDetail.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.StudentDetail.ForeColor = System.Drawing.Color.White;
             this.StudentDetail.IsBackStageButton = false;
-            this.StudentDetail.Location = new System.Drawing.Point(182, 39);
+            this.StudentDetail.Location = new System.Drawing.Point(207, 68);
             this.StudentDetail.Name = "StudentDetail";
             this.StudentDetail.Size = new System.Drawing.Size(136, 44);
             this.StudentDetail.TabIndex = 26;
@@ -88,7 +86,7 @@ namespace StudentAffairs {
             this.BehaviorDetail.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.BehaviorDetail.ForeColor = System.Drawing.Color.White;
             this.BehaviorDetail.IsBackStageButton = false;
-            this.BehaviorDetail.Location = new System.Drawing.Point(182, 89);
+            this.BehaviorDetail.Location = new System.Drawing.Point(207, 118);
             this.BehaviorDetail.Name = "BehaviorDetail";
             this.BehaviorDetail.Size = new System.Drawing.Size(136, 44);
             this.BehaviorDetail.TabIndex = 28;
@@ -105,7 +103,7 @@ namespace StudentAffairs {
             this.BehaviorList.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.BehaviorList.ForeColor = System.Drawing.Color.White;
             this.BehaviorList.IsBackStageButton = false;
-            this.BehaviorList.Location = new System.Drawing.Point(40, 89);
+            this.BehaviorList.Location = new System.Drawing.Point(65, 118);
             this.BehaviorList.Name = "BehaviorList";
             this.BehaviorList.Size = new System.Drawing.Size(136, 44);
             this.BehaviorList.TabIndex = 27;
@@ -122,7 +120,7 @@ namespace StudentAffairs {
             this.UserDetail.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.UserDetail.ForeColor = System.Drawing.Color.White;
             this.UserDetail.IsBackStageButton = false;
-            this.UserDetail.Location = new System.Drawing.Point(182, 189);
+            this.UserDetail.Location = new System.Drawing.Point(207, 168);
             this.UserDetail.Name = "UserDetail";
             this.UserDetail.Size = new System.Drawing.Size(136, 44);
             this.UserDetail.TabIndex = 32;
@@ -139,46 +137,12 @@ namespace StudentAffairs {
             this.UserList.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.UserList.ForeColor = System.Drawing.Color.White;
             this.UserList.IsBackStageButton = false;
-            this.UserList.Location = new System.Drawing.Point(40, 189);
+            this.UserList.Location = new System.Drawing.Point(65, 168);
             this.UserList.Name = "UserList";
             this.UserList.Size = new System.Drawing.Size(136, 44);
             this.UserList.TabIndex = 31;
             this.UserList.Text = "UserList";
             this.UserList.Click += new System.EventHandler(this.UserList_Click);
-            // 
-            // TeacherDetail
-            // 
-            this.TeacherDetail.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            this.TeacherDetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
-            this.TeacherDetail.BeforeTouchSize = new System.Drawing.Size(136, 44);
-            this.TeacherDetail.BorderStyleAdv = Syncfusion.Windows.Forms.ButtonAdvBorderStyle.RaisedInner;
-            this.TeacherDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TeacherDetail.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
-            this.TeacherDetail.ForeColor = System.Drawing.Color.White;
-            this.TeacherDetail.IsBackStageButton = false;
-            this.TeacherDetail.Location = new System.Drawing.Point(182, 139);
-            this.TeacherDetail.Name = "TeacherDetail";
-            this.TeacherDetail.Size = new System.Drawing.Size(136, 44);
-            this.TeacherDetail.TabIndex = 30;
-            this.TeacherDetail.Text = "TeacherDetail";
-            this.TeacherDetail.Click += new System.EventHandler(this.TeacherDetail_Click);
-            // 
-            // TeacherList
-            // 
-            this.TeacherList.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
-            this.TeacherList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
-            this.TeacherList.BeforeTouchSize = new System.Drawing.Size(136, 44);
-            this.TeacherList.BorderStyleAdv = Syncfusion.Windows.Forms.ButtonAdvBorderStyle.RaisedInner;
-            this.TeacherList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TeacherList.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
-            this.TeacherList.ForeColor = System.Drawing.Color.White;
-            this.TeacherList.IsBackStageButton = false;
-            this.TeacherList.Location = new System.Drawing.Point(40, 139);
-            this.TeacherList.Name = "TeacherList";
-            this.TeacherList.Size = new System.Drawing.Size(136, 44);
-            this.TeacherList.TabIndex = 29;
-            this.TeacherList.Text = "TeacherList";
-            this.TeacherList.Click += new System.EventHandler(this.TeacherList_Click);
             // 
             // Login
             // 
@@ -190,7 +154,7 @@ namespace StudentAffairs {
             this.Login.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.Login.ForeColor = System.Drawing.Color.White;
             this.Login.IsBackStageButton = false;
-            this.Login.Location = new System.Drawing.Point(324, 139);
+            this.Login.Location = new System.Drawing.Point(349, 118);
             this.Login.Name = "Login";
             this.Login.Size = new System.Drawing.Size(136, 44);
             this.Login.TabIndex = 33;
@@ -207,7 +171,7 @@ namespace StudentAffairs {
             this.Logout.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.Logout.ForeColor = System.Drawing.Color.White;
             this.Logout.IsBackStageButton = false;
-            this.Logout.Location = new System.Drawing.Point(324, 189);
+            this.Logout.Location = new System.Drawing.Point(349, 168);
             this.Logout.Name = "Logout";
             this.Logout.Size = new System.Drawing.Size(136, 44);
             this.Logout.TabIndex = 34;
@@ -224,14 +188,14 @@ namespace StudentAffairs {
             this.btnOptions.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.btnOptions.ForeColor = System.Drawing.Color.White;
             this.btnOptions.IsBackStageButton = false;
-            this.btnOptions.Location = new System.Drawing.Point(324, 39);
+            this.btnOptions.Location = new System.Drawing.Point(349, 68);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(136, 44);
             this.btnOptions.TabIndex = 35;
             this.btnOptions.Text = "Options";
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
-            // frmMain
+            // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -248,8 +212,6 @@ namespace StudentAffairs {
             this.Controls.Add(this.Login);
             this.Controls.Add(this.UserDetail);
             this.Controls.Add(this.UserList);
-            this.Controls.Add(this.TeacherDetail);
-            this.Controls.Add(this.TeacherList);
             this.Controls.Add(this.BehaviorDetail);
             this.Controls.Add(this.BehaviorList);
             this.Controls.Add(this.StudentDetail);
@@ -257,7 +219,7 @@ namespace StudentAffairs {
             this.ForeColor = System.Drawing.Color.DimGray;
             this.MetroColor = System.Drawing.Color.Transparent;
             this.MinimizeBox = false;
-            this.Name = "frmMain";
+            this.Name = "frmTest";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MetroForm1";
@@ -274,8 +236,6 @@ namespace StudentAffairs {
         private Syncfusion.Windows.Forms.ButtonAdv BehaviorList;
         private Syncfusion.Windows.Forms.ButtonAdv UserDetail;
         private Syncfusion.Windows.Forms.ButtonAdv UserList;
-        private Syncfusion.Windows.Forms.ButtonAdv TeacherDetail;
-        private Syncfusion.Windows.Forms.ButtonAdv TeacherList;
         private Syncfusion.Windows.Forms.ButtonAdv Login;
         private Syncfusion.Windows.Forms.ButtonAdv Logout;
         private Syncfusion.Windows.Forms.ButtonAdv btnOptions;

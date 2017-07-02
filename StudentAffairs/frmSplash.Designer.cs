@@ -41,11 +41,11 @@ namespace StudentAffairs {
             // 
             this.bigApp.AutoSize = true;
             this.bigApp.BackColor = System.Drawing.Color.Transparent;
-            this.bigApp.Font = new System.Drawing.Font("Roboto Condensed", 27F);
+            this.bigApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
             this.bigApp.ForeColor = System.Drawing.Color.White;
-            this.bigApp.Location = new System.Drawing.Point(13, 95);
+            this.bigApp.Location = new System.Drawing.Point(35, 99);
             this.bigApp.Name = "bigApp";
-            this.bigApp.Size = new System.Drawing.Size(414, 48);
+            this.bigApp.Size = new System.Drawing.Size(367, 36);
             this.bigApp.TabIndex = 2;
             this.bigApp.Text = "ระบบบันทึกพฤติกรรมนักเรียน";
             // 
@@ -53,13 +53,13 @@ namespace StudentAffairs {
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Roboto Condensed", 15F);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(6, 215);
+            this.label1.Location = new System.Drawing.Point(6, 225);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 26);
+            this.label1.Size = new System.Drawing.Size(141, 17);
             this.label1.TabIndex = 3;
-            this.label1.Text = "กำลังเตรียมความพร้อม";
+            this.label1.Text = "กำลังเตรียมความพร้อม...";
             // 
             // panel1
             // 
@@ -74,7 +74,7 @@ namespace StudentAffairs {
             // progressbar1
             // 
             this.progressbar1.BackColor = System.Drawing.Color.Transparent;
-            this.progressbar1.Location = new System.Drawing.Point(63, 158);
+            this.progressbar1.Location = new System.Drawing.Point(63, 152);
             this.progressbar1.Name = "progressbar1";
             this.progressbar1.Size = new System.Drawing.Size(308, 14);
             this.progressbar1.TabIndex = 6;
@@ -99,6 +99,8 @@ namespace StudentAffairs {
             this.Name = "frmSplash";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmSplash_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

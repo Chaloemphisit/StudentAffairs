@@ -6,18 +6,6 @@ using System.Threading.Tasks;
 
 namespace StudentAffairs.Module {
     class modFunction {
-    //    Public Function generatePassword(Optional ByVal n As Integer = 8) As String
-    //    'the following is the string that will hold the salt charachters
-    //    Dim mix As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-    //    Dim salt As String = ""
-    //    Dim rnd As New Random
-    //    Dim sb As New StringBuilder
-    //    For i As Integer = 1 To n 'Length of the salt
-    //        Dim x As Integer = rnd.Next(0, mix.Length - 1)
-    //        salt &= (mix.Substring(x, 1))
-    //    Next
-    //    Return salt
-    //End Function
 
         public static string passwordGen(int n=8) {
             String ch = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -37,11 +25,44 @@ namespace StudentAffairs.Module {
 
             return "T" + id;
         }
+        
+        public static Boolean validNullTxt(System.Windows.Forms.Control txtCtl, 
+                            System.Windows.Forms.ErrorProvider errorProvider,
+                           int minLength = 0,string type=null,string msg = "This field is required") {
 
-    //Public Function generateUsername(id As String) As String
-    //    Dim username As String
-    //    username = "T" & id
-    //    Return username
-    //End Function
+            switch (type) {
+
+                case "Number": {
+                        break;
+                    }
+                case "strEnglishOnly": {
+                        break;
+                    }
+                default: {
+                        if ((!String.IsNullOrWhiteSpace(txtCtl.Text))) {
+                            errorProvider.SetError(txtCtl, "");
+                            return false;
+                        } else {
+                            if (txtCtl.Text.Length < minLength) msg += " and Length must be greater than " + minLength;
+                            errorProvider.SetError(txtCtl, msg);
+                            return true;
+                        }
+                    }
+            }
+            return false;
+            
+        }
+
+        public static Boolean validNotSelectCB(Syncfusion.Windows.Forms.Tools.ComboBoxAdv cbCtl, 
+                           System.Windows.Forms.ErrorProvider errorProvider, string msg = "This field is required") {
+
+            if (cbCtl.SelectedIndex==-1) {
+                errorProvider.SetError(cbCtl, msg);
+                return true;
+            } else {
+                errorProvider.SetError(cbCtl, "");
+                return false;
+            }
+        }
     }
 }

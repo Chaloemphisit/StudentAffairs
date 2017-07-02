@@ -18,10 +18,14 @@ using System.Data.OleDb;
 using System.Drawing;
 
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace StudentAffairs.formData {
     public partial class frmBehaviorList : Syncfusion.Windows.Forms.MetroForm {
+        frmBehaviorDetail frmBehaviorDetail;
+        private int currentCellIndex = -1;
+
         public event EventHandler LoadCompleted;
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
@@ -34,11 +38,25 @@ namespace StudentAffairs.formData {
         }
 
         public frmBehaviorList() {
-
+            frmWait frmWait = new frmWait();
+            Thread splashThread = new Thread(new ThreadStart(
+                    () => { frmWait.ShowDialog(); }));//Application.Run(frmWait);
+            splashThread.SetApartmentState(ApartmentState.MTA);
+            splashThread.Start();
             InitializeComponent();
-            //---------------------------------------------------------------------------------------
-            // Grid Stacked Header Descriptor
+            gshd();
+            RetrieveData();
+            splashThread.Abort();
 
+        }
+
+        private void frmBehaviorList_Load(object sender, EventArgs e) {
+
+        }
+
+        //---------------------------------------------------------------------------------------
+        // Grid Stacked Header Descriptor
+        void gshd() {
             // Add any initialization after the InitializeComponent() call.
             GridStackedHeaderDescriptor shd1 = new GridStackedHeaderDescriptor("header1", "ข้อมูลทั้่วไป");
             GridStackedHeaderDescriptor shd2 = new GridStackedHeaderDescriptor("header2", "พฤติกรรม");
@@ -69,11 +87,6 @@ namespace StudentAffairs.formData {
             // Display Stacked Headers 
             GGC.TopLevelGroupOptions.ShowStackedHeaders = true;
             //---------------------------------------------------------------------------------------
-        }
-
-        private void frmBehaviorList_Load(object sender, EventArgs e) {
-            if (authentication.checkStatus()) RetrieveData();
-            else Application.Exit();
         }
 
         private void InitGridGroup() {
@@ -176,16 +189,16 @@ namespace StudentAffairs.formData {
             database.Conn = database.ConnectDB();
 
             database.strSQL =
-                "SELECT tblBehavior.PK, tblStudent.std_ID, tblStudent.std_FirstName, tblStudent.std_LastName, " +
-                "tblStudent.std_Class, tblStudent.std_Room, tblBehavior.BehaviorDetail, " +
-                "tblBehavior.Implementation, tblBehavior.Realization, tblBehaviorType.Type, " +
-                "tblBehavior.CreateAt, tblBehavior.UpdateAt, " +
-                "[tblTeacher].[TeacherFirstName] + ' ' + [TeacherLastName] AS RecorderName, " +
-                "tblBehavior.RecorderID, tblBehavior.BehaviorType FROM tblTeacher " +
-                "INNER JOIN (tblStudent INNER JOIN (tblBehaviorType INNER JOIN tblBehavior " +
+                "SELECT tblBehavior.PK, tblStudent.std_ID, tblStudent.std_FirstName, " +
+                "tblStudent.std_LastName, tblStudent.std_Class, tblStudent.std_Room,  " +
+                "tblBehavior.BehaviorDetail, tblBehavior.Implementation, tblBehavior.Realization,  " +
+                "tblBehaviorType.Type, tblBehavior.CreateAt,  " +
+                "[tblTeacher].[TeacherFirstName] & ' ' & [TeacherLastName] AS RecorderName,  " +
+                "tblBehavior.TeacherID, tblBehavior.BehaviorType, tblBehavior.UpdateAt " +
+                "FROM tblStudent INNER JOIN(tblBehaviorType INNER JOIN (tblTeacher INNER JOIN tblBehavior " +
+                "ON tblTeacher.TeacherID = tblBehavior.[TeacherID]) " +
                 "ON tblBehaviorType.BehaviorTypePK = tblBehavior.BehaviorType) " +
-                "ON tblStudent.std_ID = tblBehavior.std_ID) " +
-                "ON tblTeacher.TeacherID = tblBehavior.RecorderID ";
+                "ON tblStudent.std_ID = tblBehavior.std_ID";
 
             // blnSearch = True for Serach
 
@@ -195,11 +208,11 @@ namespace StudentAffairs.formData {
                     " [std_ID] " + " Like '%" + txtSearch.Text + "%'" + " OR " +
                     " [std_FirstName] " + " Like '%" + txtSearch.Text + "%'" + " OR " +
                     " [std_LastName] " + " Like '%" + txtSearch.Text + "%'";// +
-                    //" ORDER BY [std_ID] ";
+                                                                            //" ORDER BY [std_ID] ";
             } else {
                 database.strSQL = database.strSQL + " ORDER BY tblBehavior.PK ";
             }
-            //MessageBox.Show(database.strSQL);
+            //MessageBox(database.strSQL);
 
             //
             if (database.Conn.State == ConnectionState.Closed) { database.Conn.Open(); }
@@ -218,6 +231,13 @@ namespace StudentAffairs.formData {
         }
 
         private void GGC_TableControlCurrentCellActivated(object sender, GridTableControlEventArgs e) {
+            //Notify the double click performed in a cell
+            Record rec = GGC.Table.DisplayElements[e.TableControl.CurrentCell.RowIndex].ParentRecord;
+            //If(rec) IsNot Nothing Then
+            if (rec != null) {
+                frmBehaviorDetail.PK = (int)(rec.GetValue("PK"));
+                currentCellIndex = e.TableControl.CurrentCell.RowIndex;
+            }
         }
 
         private void GGC_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e) {
@@ -225,11 +245,11 @@ namespace StudentAffairs.formData {
             Record rec = GGC.Table.DisplayElements[e.TableControl.CurrentCell.RowIndex].ParentRecord;
             //If(rec) IsNot Nothing Then
             if (rec != null) {
-                var frmBehaviorDetail = new frmBehaviorDetail();
+                frmBehaviorDetail = new frmBehaviorDetail();
                 frmBehaviorDetail.PK = (int)(rec.GetValue("PK"));
                 frmBehaviorDetail.editMode();
-                frmBehaviorDetail.Show();
-                //MessageBox.Show(frmBehaviorDetail.PK + "");
+                frmBehaviorDetail.ShowDialog();
+                //MessageBox(frmBehaviorDetail.PK + "");
             }
         }
 
@@ -237,5 +257,45 @@ namespace StudentAffairs.formData {
             RetrieveData();
         }
 
+        private void frmBehaviorList_FormClosed(object sender, FormClosedEventArgs e) {
+            this.Hide();
+        }
+
+        private void frmBehaviorList_FormClosing(object sender, FormClosingEventArgs e) {
+            this.Hide();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e) {
+            frmBehaviorDetail = new frmBehaviorDetail();
+            frmBehaviorDetail.newMode();
+            frmBehaviorDetail.ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e) {
+
+            if (currentCellIndex < 0) {
+                MessageBoxAdv.Show("กรุณาเลือกข้อมูลในตารางก่อนทำรายการ!", "รายงานความผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                GGC.Focus();
+            } else {
+                frmBehaviorDetail = new frmBehaviorDetail();
+                frmBehaviorDetail.editMode();
+                frmBehaviorDetail.ShowDialog();
+                RetrieveData();
+                currentCellIndex = -1;
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e) {
+            if (currentCellIndex < 0) {
+                MessageBoxAdv.Show("กรุณาเลือกข้อมูลในตารางก่อนทำรายการ!", "รายงานความผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                GGC.Focus();
+            } else {
+                frmBehaviorDetail = new frmBehaviorDetail();
+                frmBehaviorDetail.editMode();
+                frmBehaviorDetail.deleteData();
+                RetrieveData();
+                currentCellIndex = -1;
+            }
+        }
     }
 }

@@ -15,21 +15,33 @@ using StudentAffairs.formAuth;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using StudentAffairs.Module;
 
 namespace StudentAffairs {
     public partial class frmTest : Syncfusion.Windows.Forms.MetroForm {
         loadForm loadForm;
+
+        public static event EventHandler LoadCompleted;
+
+        protected override void OnLoad(EventArgs e) {
+            base.OnLoad(e);
+            this.OnLoadCompleted(EventArgs.Empty);
+        }
+        protected virtual void OnLoadCompleted(EventArgs e) {
+            var handler = LoadCompleted;
+            if (handler != null) handler(this, e);
+            loadForm.eventCompleted = true;
+        }
+
         public frmTest() {
-            InitializeComponent();
             loadForm = new loadForm();
+            InitializeComponent();
         }
 
         private void StudentList_Click(object sender, EventArgs e) {
-
             var frmStudentList = new frmStudentList();
-            loadForm.showWaitForm(frmStudentList);
-            var frmBehaviorList = new formData.frmBehaviorList();
-            loadForm.showWaitForm(frmBehaviorList);
+            //loadForm.showWaitForm(frmStudentList);
+            frmStudentList.Show();
         }
 
         private void StudentDetail_Click(object sender, EventArgs e) {
@@ -45,16 +57,6 @@ namespace StudentAffairs {
         private void BehaviorDetail_Click(object sender, EventArgs e) {
             var frmBehaviorDetail = new formData.frmBehaviorDetail();
             loadForm.showWaitForm(frmBehaviorDetail);
-        }
-
-        private void TeacherList_Click(object sender, EventArgs e) {
-            var frmTeacherList = new frmTeacherList();
-            loadForm.showWaitForm(frmTeacherList);
-        }
-
-        private void TeacherDetail_Click(object sender, EventArgs e) {
-            var frmTeacherDetail = new frmTeacherDetail();
-            frmTeacherDetail.Show();
         }
 
         private void UserList_Click(object sender, EventArgs e) {
@@ -77,7 +79,8 @@ namespace StudentAffairs {
         }
 
         private void Logout_Click(object sender, EventArgs e) {
-            Module.authentication.signOut();
+            authentication authentication = new authentication();
+            authentication.signOut();
         }
 
         private void btnOptions_Click(object sender, EventArgs e) {

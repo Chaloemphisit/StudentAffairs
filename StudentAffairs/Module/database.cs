@@ -1,5 +1,6 @@
 ﻿
 using StudentAffairs.Properties;
+using Syncfusion.Windows.Forms;
 using System;
 using System.Data;
 using System.Data.OleDb;
@@ -47,7 +48,7 @@ namespace StudentAffairs.Module {
         public static OleDbConnection ConnectDB() {
 
             String strPath = MyPath(Application.StartupPath);
-            //MessageBox.Show(MyPath(Application.StartupPath));
+            //MessageBoxAdv.Show(MyPath(Application.StartupPath));
 
             //ให้ต่อท้ายด้วยโฟลเดอร์ตำแหน่งของข้อมูลที่ต้องการ คือ  \Data\ไฟล์ข้อมูล MS Access
             String strConn = "Provider = Microsoft.ACE.OLEDB.12.0; ";
@@ -91,11 +92,11 @@ namespace StudentAffairs.Module {
                 Cmd.CommandType = CommandType.Text;
                 Cmd.CommandText = sql;
                 Cmd.ExecuteNonQuery();
-                if (showMsg) MessageBox.Show(msg, "รายงานสถานะ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (showMsg) MessageBoxAdv.Show(msg, "รายงานสถานะ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Cmd.Dispose();
                 return true;
             } catch (Exception e) {
-                MessageBox.Show("Error Update: " + e.Message);
+                MessageBoxAdv.Show("Error Update: " + e.Message,"ผิดพลาด");
                 return false;
             }
 

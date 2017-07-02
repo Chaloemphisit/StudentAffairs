@@ -33,15 +33,16 @@ namespace StudentAffairs.formData {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBehaviorList));
             this.GGC = new Syncfusion.Windows.Forms.Grid.Grouping.GridGroupingControl();
             this.ToolStripEx1 = new Syncfusion.Windows.Forms.Tools.ToolStripEx();
-            this.ToolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.ToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.ToolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnNew = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.ToolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.lblRecordCount = new System.Windows.Forms.ToolStripLabel();
+            this.lblDesc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GGC)).BeginInit();
             this.ToolStripEx1.SuspendLayout();
             this.SuspendLayout();
@@ -71,9 +72,9 @@ namespace StudentAffairs.formData {
             this.ToolStripEx1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ToolStripEx1.Image = null;
             this.ToolStripEx1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripButton3,
-            this.ToolStripButton1,
-            this.ToolStripButton4,
+            this.btnNew,
+            this.btnEdit,
+            this.btnDelete,
             this.ToolStripButton2,
             this.ToolStripSeparator1,
             this.ToolStripLabel1,
@@ -91,38 +92,42 @@ namespace StudentAffairs.formData {
             this.ToolStripEx1.TabIndex = 70;
             this.ToolStripEx1.VisualStyle = Syncfusion.Windows.Forms.Tools.ToolStripExStyle.Metro;
             // 
-            // ToolStripButton3
+            // btnNew
             // 
-            this.ToolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton3.Image")));
-            this.ToolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolStripButton3.Name = "ToolStripButton3";
-            this.ToolStripButton3.Size = new System.Drawing.Size(52, 64);
-            this.ToolStripButton3.Text = "เพิ่มข้อมูล";
-            this.ToolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
+            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(52, 64);
+            this.btnNew.Text = "เพิ่มข้อมูล";
+            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // ToolStripButton1
+            // btnEdit
             // 
-            this.ToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton1.Image")));
-            this.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolStripButton1.Name = "ToolStripButton1";
-            this.ToolStripButton1.Size = new System.Drawing.Size(58, 64);
-            this.ToolStripButton1.Text = "แก้ไขข้อมูล";
-            this.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(58, 64);
+            this.btnEdit.Text = "แก้ไขข้อมูล";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // ToolStripButton4
+            // btnDelete
             // 
-            this.ToolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton4.Image")));
-            this.ToolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolStripButton4.Name = "ToolStripButton4";
-            this.ToolStripButton4.Size = new System.Drawing.Size(52, 64);
-            this.ToolStripButton4.Text = "ลบข้อมูล";
-            this.ToolStripButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(52, 64);
+            this.btnDelete.Text = "ลบข้อมูล";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // ToolStripButton2
             // 
+            this.ToolStripButton2.Enabled = false;
             this.ToolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripButton2.Image")));
             this.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -164,6 +169,18 @@ namespace StudentAffairs.formData {
             this.lblRecordCount.Size = new System.Drawing.Size(17, 64);
             this.lblRecordCount.Text = "[]";
             // 
+            // lblDesc
+            // 
+            this.lblDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDesc.AutoSize = true;
+            this.lblDesc.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.lblDesc.ForeColor = System.Drawing.Color.Red;
+            this.lblDesc.Location = new System.Drawing.Point(563, 56);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Size = new System.Drawing.Size(191, 13);
+            this.lblDesc.TabIndex = 74;
+            this.lblDesc.Text = "Double click the mouse to select items.";
+            // 
             // frmBehaviorList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -176,6 +193,7 @@ namespace StudentAffairs.formData {
             this.CaptionFont = new System.Drawing.Font("Roboto Condensed Light", 23F);
             this.CaptionForeColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(754, 440);
+            this.Controls.Add(this.lblDesc);
             this.Controls.Add(this.GGC);
             this.Controls.Add(this.ToolStripEx1);
             this.ForeColor = System.Drawing.Color.DimGray;
@@ -185,11 +203,15 @@ namespace StudentAffairs.formData {
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "พฤติกรรมนักเรียน";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmBehaviorList_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmBehaviorList_FormClosed);
             this.Load += new System.EventHandler(this.frmBehaviorList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GGC)).EndInit();
             this.ToolStripEx1.ResumeLayout(false);
             this.ToolStripEx1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -197,14 +219,15 @@ namespace StudentAffairs.formData {
 
         private Syncfusion.Windows.Forms.Grid.Grouping.GridGroupingControl GGC;
         internal Syncfusion.Windows.Forms.Tools.ToolStripEx ToolStripEx1;
-        internal System.Windows.Forms.ToolStripButton ToolStripButton3;
-        internal System.Windows.Forms.ToolStripButton ToolStripButton1;
-        internal System.Windows.Forms.ToolStripButton ToolStripButton4;
+        internal System.Windows.Forms.ToolStripButton btnNew;
+        internal System.Windows.Forms.ToolStripButton btnEdit;
+        internal System.Windows.Forms.ToolStripButton btnDelete;
         internal System.Windows.Forms.ToolStripButton ToolStripButton2;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         internal System.Windows.Forms.ToolStripLabel ToolStripLabel1;
         internal System.Windows.Forms.ToolStripTextBox txtSearch;
         internal System.Windows.Forms.ToolStripButton btnRefresh;
         internal System.Windows.Forms.ToolStripLabel lblRecordCount;
+        internal System.Windows.Forms.Label lblDesc;
     }
 }

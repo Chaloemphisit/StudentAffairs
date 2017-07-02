@@ -7,14 +7,17 @@ using System.Windows.Forms;
 using StudentAffairs.formAuth;
 using StudentAffairs.formData;
 using System.Threading;
+using Syncfusion.Windows.Forms;
+using System.Drawing;
 
 namespace StudentAffairs
 {
     static class Program
     {
         static frmSplash frmSplash;
+        //static frmTest frmTest;
         static frmMain frmMain;
-        static frmLogin frmLogin;
+        static frmStudentList frmStudentList;
 
         /// <summary>
         /// The main entry point for the application.
@@ -22,6 +25,9 @@ namespace StudentAffairs
         [STAThread]
         static void Main()
         {
+            //Apply Style to MessageBoxAdv
+            msgbAdv();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Show Splash Form
@@ -29,15 +35,16 @@ namespace StudentAffairs
             if (frmSplash != null) {
                 Thread splashThread = new Thread(new ThreadStart(
                     () => { Application.Run(frmSplash); }));
-                splashThread.SetApartmentState(ApartmentState.STA);
+                splashThread.SetApartmentState(ApartmentState.MTA);
                 splashThread.Start();
             }
-            //Thread.Sleep(2000);
             //Create and Show Main Form
             frmMain = new frmMain();
             frmMain.LoadCompleted += MainForm_LoadCompleted;
+            frmMain.TopMost = true;
             Application.Run(frmMain);
             frmMain.Focus();
+            frmMain.Activate();
         }
 
         private static void MainForm_LoadCompleted(object sender, EventArgs e) {
@@ -45,11 +52,46 @@ namespace StudentAffairs
             if (frmSplash == null || frmSplash.Disposing || frmSplash.IsDisposed)
                 return;
             frmSplash.Invoke(new Action(() => { frmSplash.Close(); }));
+            frmMain.TopMost = false;
             frmSplash.Dispose();
             frmSplash = null;
+            if (Module.authentication.checkStatus()) {
+                frmStudentList = new frmStudentList();
+                frmStudentList.MdiParent = frmMain;
+                frmStudentList.Show();
+            }
+
             frmMain.Activate();
-           // frmLogin.Focus();
-           // Module.authentication.checkStatus();
+            frmMain.Focus();
+
+        }
+
+        public static void msgbAdv() {
+            MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
+
+            MessageBoxAdv.MetroColorTable.BorderColor = System.Drawing.Color.FromArgb(27, 161, 226);
+            MessageBoxAdv.MetroColorTable.ForeColor = Color.Black;
+            MessageBoxAdv.MetroColorTable.BackColor = Color.White;
+
+            MessageBoxAdv.MetroColorTable.CaptionBarColor = System.Drawing.Color.FromArgb(27, 161, 226);
+            MessageBoxAdv.MetroColorTable.CaptionForeColor = Color.White;
+
+            //-----------//
+            /*   Button  */
+            //-----------//
+                
+                MessageBoxAdv.MetroColorTable.OKButtonBackColor = System.Drawing.Color.FromArgb(27, 161, 226);
+                MessageBoxAdv.MetroColorTable.OKButtonForeColor = Color.White;
+
+                MessageBoxAdv.MetroColorTable.YesButtonBackColor = System.Drawing.Color.FromArgb(27, 161, 226);
+                MessageBoxAdv.MetroColorTable.YesButtonForeColor = Color.White;
+
+                MessageBoxAdv.MetroColorTable.NoButtonBackColor = System.Drawing.Color.FromArgb(27, 161, 226);
+                MessageBoxAdv.MetroColorTable.NoButtonForeColor = Color.White;
+
+                MessageBoxAdv.MetroColorTable.CancelButtonBackColor = System.Drawing.Color.FromArgb(27, 161, 226);
+                MessageBoxAdv.MetroColorTable.CancelButtonBackColor = Color.White;
+            //-----------//
         }
 
     }

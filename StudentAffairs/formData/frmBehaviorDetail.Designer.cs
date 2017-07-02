@@ -61,6 +61,7 @@ namespace StudentAffairs.formData {
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.Label2 = new System.Windows.Forms.Label();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRecorderName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbType)).BeginInit();
@@ -75,6 +76,7 @@ namespace StudentAffairs.formData {
             ((System.ComponentModel.ISupportInitialize)(this.txtDetail)).BeginInit();
             this.GroupBox1.SuspendLayout();
             this.GroupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDelete
@@ -128,6 +130,7 @@ namespace StudentAffairs.formData {
             this.DateTimePicker.MinValue = new System.DateTime(((long)(0)));
             this.DateTimePicker.Name = "DateTimePicker";
             this.DateTimePicker.NoneButtonVisible = false;
+            this.DateTimePicker.ShowCheckBox = false;
             this.DateTimePicker.Size = new System.Drawing.Size(276, 31);
             this.DateTimePicker.Style = Syncfusion.Windows.Forms.VisualStyle.Metro;
             this.DateTimePicker.TabIndex = 11;
@@ -137,7 +140,7 @@ namespace StudentAffairs.formData {
             // txtRecorderName
             // 
             this.txtRecorderName.BackColor = System.Drawing.Color.SeaShell;
-            this.txtRecorderName.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtRecorderName.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtRecorderName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtRecorderName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRecorderName.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -184,6 +187,7 @@ namespace StudentAffairs.formData {
             this.cbType.Text = "เลือก";
             this.cbType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cbType.UseMetroButtonColor = true;
+            this.cbType.Validating += new System.ComponentModel.CancelEventHandler(this.cbType_Validating);
             // 
             // Label9
             // 
@@ -220,7 +224,7 @@ namespace StudentAffairs.formData {
             // txtStudentFirstName
             // 
             this.txtStudentFirstName.BackColor = System.Drawing.Color.SeaShell;
-            this.txtStudentFirstName.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtStudentFirstName.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtStudentFirstName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtStudentFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtStudentFirstName.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -243,7 +247,7 @@ namespace StudentAffairs.formData {
             // txtStudentLastName
             // 
             this.txtStudentLastName.BackColor = System.Drawing.Color.SeaShell;
-            this.txtStudentLastName.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtStudentLastName.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtStudentLastName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtStudentLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtStudentLastName.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -281,11 +285,12 @@ namespace StudentAffairs.formData {
             this.btnRefresh.TabIndex = 2;
             this.btnRefresh.TabStop = false;
             this.btnRefresh.UseVisualStyle = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // txtRoom
             // 
             this.txtRoom.BackColor = System.Drawing.Color.SeaShell;
-            this.txtRoom.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtRoom.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtRoom.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRoom.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -308,7 +313,7 @@ namespace StudentAffairs.formData {
             // txtClass
             // 
             this.txtClass.BackColor = System.Drawing.Color.SeaShell;
-            this.txtClass.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtClass.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtClass.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtClass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtClass.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -403,7 +408,7 @@ namespace StudentAffairs.formData {
             // txtStudentID
             // 
             this.txtStudentID.BackColor = System.Drawing.Color.White;
-            this.txtStudentID.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtStudentID.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtStudentID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtStudentID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtStudentID.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -422,6 +427,7 @@ namespace StudentAffairs.formData {
             this.txtStudentID.WordWrap = false;
             this.txtStudentID.TextChanged += new System.EventHandler(this.txtStudentID_TextChanged);
             this.txtStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStudentID_KeyPress);
+            this.txtStudentID.Validating += new System.ComponentModel.CancelEventHandler(this.txtStudentID_Validating);
             // 
             // Label7
             // 
@@ -438,7 +444,7 @@ namespace StudentAffairs.formData {
             // txtRealization
             // 
             this.txtRealization.BackColor = System.Drawing.Color.White;
-            this.txtRealization.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtRealization.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtRealization.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtRealization.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRealization.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -455,6 +461,7 @@ namespace StudentAffairs.formData {
             this.txtRealization.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtRealization.TabIndex = 9;
             this.txtRealization.Text = "txtRealization";
+            this.txtRealization.Validating += new System.ComponentModel.CancelEventHandler(this.txtRealization_Validating);
             // 
             // Label8
             // 
@@ -471,7 +478,7 @@ namespace StudentAffairs.formData {
             // txtImplementation
             // 
             this.txtImplementation.BackColor = System.Drawing.Color.White;
-            this.txtImplementation.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtImplementation.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtImplementation.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtImplementation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtImplementation.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -488,6 +495,7 @@ namespace StudentAffairs.formData {
             this.txtImplementation.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtImplementation.TabIndex = 8;
             this.txtImplementation.Text = "txtImplementation";
+            this.txtImplementation.Validating += new System.ComponentModel.CancelEventHandler(this.txtImplementation_Validating);
             // 
             // Label6
             // 
@@ -504,7 +512,7 @@ namespace StudentAffairs.formData {
             // txtDetail
             // 
             this.txtDetail.BackColor = System.Drawing.Color.White;
-            this.txtDetail.BeforeTouchSize = new System.Drawing.Size(274, 155);
+            this.txtDetail.BeforeTouchSize = new System.Drawing.Size(245, 30);
             this.txtDetail.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtDetail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDetail.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -521,6 +529,7 @@ namespace StudentAffairs.formData {
             this.txtDetail.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtDetail.TabIndex = 7;
             this.txtDetail.Text = "txtDetail";
+            this.txtDetail.Validating += new System.ComponentModel.CancelEventHandler(this.txtDetail_Validating);
             // 
             // Label5
             // 
@@ -579,6 +588,10 @@ namespace StudentAffairs.formData {
             this.GroupBox2.TabIndex = 1;
             this.GroupBox2.TabStop = false;
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // frmBehaviorDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -619,6 +632,7 @@ namespace StudentAffairs.formData {
             this.GroupBox1.PerformLayout();
             this.GroupBox2.ResumeLayout(false);
             this.GroupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -639,7 +653,6 @@ namespace StudentAffairs.formData {
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.GroupBox GroupBox2;
-        protected Syncfusion.Windows.Forms.ButtonAdv btnDelete;
         protected Syncfusion.Windows.Forms.Tools.DateTimePickerAdv DateTimePicker;
         protected Syncfusion.Windows.Forms.Tools.TextBoxExt txtRecorderName;
         protected Syncfusion.Windows.Forms.Tools.ComboBoxAdv cbType;
@@ -653,5 +666,7 @@ namespace StudentAffairs.formData {
         protected Syncfusion.Windows.Forms.Tools.TextBoxExt txtRealization;
         protected Syncfusion.Windows.Forms.Tools.TextBoxExt txtImplementation;
         protected Syncfusion.Windows.Forms.Tools.TextBoxExt txtDetail;
+        public Syncfusion.Windows.Forms.ButtonAdv btnDelete;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

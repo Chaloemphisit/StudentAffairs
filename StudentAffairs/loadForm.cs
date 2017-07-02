@@ -8,11 +8,12 @@ using System.Windows.Forms;
 using StudentAffairs.formAuth;
 using StudentAffairs.formData;
 using System.Threading;
+using Syncfusion.Windows.Forms;
 
 namespace StudentAffairs {
     class loadForm {
-        frmWait frmWait;
-        Thread splashThread;
+        static frmWait frmWait;
+        static Thread splashThread;
 
         private static Boolean eventComplt = false;
 
@@ -23,7 +24,7 @@ namespace StudentAffairs {
         
 
 
-        public void showWaitForm(Form formCreator) {
+        public static void showWaitForm(Form formCreator) {
             //check Login Status
             if (Module.authentication.checkStatus()) {
                 //Show Wait Form
@@ -34,7 +35,7 @@ namespace StudentAffairs {
                     splashThread.SetApartmentState(ApartmentState.STA);
                     splashThread.Start();
                 }
-
+                Module.authentication.checkStatus();
                 formCreator.Load += frm_LoadCompleted;
                 //Application.Run(formCreator);
                 formCreator.Show();
@@ -44,10 +45,12 @@ namespace StudentAffairs {
             }
         }
 
-        public void frm_LoadCompleted(object sender, EventArgs e) {
+        public static void frm_LoadCompleted(object sender, EventArgs e) {
             if (frmWait == null || frmWait.Disposing || frmWait.IsDisposed) return;
             frmWait.Invoke(new Action(() => { frmWait.Close(); }));
             frmWait.Dispose();
+            MessageBoxAdv.Show("frm_LoadCompleted");
+            //Module.authentication.checkStatus();
             //frmWait.Close();
             frmWait = null;
             //splashThread.Abort();

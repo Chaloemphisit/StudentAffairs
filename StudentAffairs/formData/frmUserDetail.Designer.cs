@@ -35,7 +35,6 @@ namespace StudentAffairs.formData {
             this.Panel2 = new System.Windows.Forms.Panel();
             this.txtTeacherID = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.Label7 = new System.Windows.Forms.Label();
-            this.cbUserRole = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             this.txtPassword = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.txtUsername = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.txtTRole = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
@@ -51,15 +50,19 @@ namespace StudentAffairs.formData {
             this.ckbGeneratePwd = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
             this.ckbShowPwd = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
             this.btnReset = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.btnDelete = new Syncfusion.Windows.Forms.ButtonAdv();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cbUserRole = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTeacherID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbUserRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbGeneratePwd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbShowPwd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbUserRole)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLastName
@@ -94,7 +97,7 @@ namespace StudentAffairs.formData {
             // 
             // txtTeacherID
             // 
-            this.txtTeacherID.BackColor = System.Drawing.Color.White;
+            this.txtTeacherID.BackColor = System.Drawing.Color.SeaShell;
             this.txtTeacherID.BeforeTouchSize = new System.Drawing.Size(249, 30);
             this.txtTeacherID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
             this.txtTeacherID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -106,6 +109,7 @@ namespace StudentAffairs.formData {
             this.txtTeacherID.Metrocolor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
             this.txtTeacherID.MinimumSize = new System.Drawing.Size(8, 4);
             this.txtTeacherID.Name = "txtTeacherID";
+            this.txtTeacherID.ReadOnly = true;
             this.txtTeacherID.Size = new System.Drawing.Size(249, 30);
             this.txtTeacherID.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtTeacherID.TabIndex = 76;
@@ -124,23 +128,6 @@ namespace StudentAffairs.formData {
             this.Label7.Size = new System.Drawing.Size(96, 28);
             this.Label7.TabIndex = 93;
             this.Label7.Text = "รหัสประจำตัว";
-            // 
-            // cbUserRole
-            // 
-            this.cbUserRole.BackColor = System.Drawing.Color.White;
-            this.cbUserRole.BeforeTouchSize = new System.Drawing.Size(245, 31);
-            this.cbUserRole.FlatBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
-            this.cbUserRole.Font = new System.Drawing.Font("Roboto Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUserRole.ForeColor = System.Drawing.Color.DimGray;
-            this.cbUserRole.Location = new System.Drawing.Point(31, 267);
-            this.cbUserRole.MetroBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
-            this.cbUserRole.Name = "cbUserRole";
-            this.cbUserRole.Size = new System.Drawing.Size(245, 31);
-            this.cbUserRole.Style = Syncfusion.Windows.Forms.VisualStyle.Metro;
-            this.cbUserRole.TabIndex = 84;
-            this.cbUserRole.Text = "กรุณาเลือก";
-            this.cbUserRole.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.cbUserRole.UseMetroButtonColor = true;
             // 
             // txtPassword
             // 
@@ -250,11 +237,12 @@ namespace StudentAffairs.formData {
             this.btnSave.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.IsBackStageButton = false;
-            this.btnSave.Location = new System.Drawing.Point(304, 345);
+            this.btnSave.Location = new System.Drawing.Point(181, 345);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(120, 31);
             this.btnSave.TabIndex = 85;
             this.btnSave.Text = "บันทึก";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // Label5
             // 
@@ -342,6 +330,7 @@ namespace StudentAffairs.formData {
             this.ckbGeneratePwd.Text = "สร้างอัตโนมัติ";
             this.ckbGeneratePwd.ThemesEnabled = false;
             this.ckbGeneratePwd.Visible = false;
+            this.ckbGeneratePwd.CheckStateChanged += new System.EventHandler(this.ckbGeneratePwd_CheckStateChanged);
             // 
             // ckbShowPwd
             // 
@@ -357,6 +346,7 @@ namespace StudentAffairs.formData {
             this.ckbShowPwd.Text = "แสดงรหัสผ่าน";
             this.ckbShowPwd.ThemesEnabled = false;
             this.ckbShowPwd.Visible = false;
+            this.ckbShowPwd.CheckStateChanged += new System.EventHandler(this.ckbShowPwd_CheckStateChanged);
             // 
             // btnReset
             // 
@@ -375,6 +365,44 @@ namespace StudentAffairs.formData {
             this.btnReset.Text = "รีเซ็ทรหัสผ่าน";
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
+            this.btnDelete.BeforeTouchSize = new System.Drawing.Size(120, 31);
+            this.btnDelete.BorderStyleAdv = Syncfusion.Windows.Forms.ButtonAdvBorderStyle.RaisedInner;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Roboto Condensed Light", 12F);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.IsBackStageButton = false;
+            this.btnDelete.Location = new System.Drawing.Point(307, 345);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(120, 31);
+            this.btnDelete.TabIndex = 96;
+            this.btnDelete.Text = "ลบ";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // cbUserRole
+            // 
+            this.cbUserRole.BackColor = System.Drawing.Color.White;
+            this.cbUserRole.BeforeTouchSize = new System.Drawing.Size(245, 31);
+            this.cbUserRole.FlatBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
+            this.cbUserRole.Font = new System.Drawing.Font("Roboto Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbUserRole.ForeColor = System.Drawing.Color.DimGray;
+            this.cbUserRole.Location = new System.Drawing.Point(31, 267);
+            this.cbUserRole.MetroBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(161)))), ((int)(((byte)(226)))));
+            this.cbUserRole.Name = "cbUserRole";
+            this.cbUserRole.Size = new System.Drawing.Size(245, 31);
+            this.cbUserRole.Style = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            this.cbUserRole.TabIndex = 84;
+            this.cbUserRole.Text = "กรุณาเลือก";
+            this.cbUserRole.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.cbUserRole.UseMetroButtonColor = true;
+            // 
             // frmUserDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -387,6 +415,7 @@ namespace StudentAffairs.formData {
             this.CaptionFont = new System.Drawing.Font("Roboto Condensed Light", 23F);
             this.CaptionForeColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(588, 389);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.Panel2);
@@ -414,31 +443,26 @@ namespace StudentAffairs.formData {
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ข้อมูลผู้ใช้งาน";
+            this.Load += new System.EventHandler(this.frmUserDetail_Load);
+            this.Shown += new System.EventHandler(this.frmUserDetail_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTeacherID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbUserRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbGeneratePwd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckbShowPwd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbUserRole)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        internal Syncfusion.Windows.Forms.Tools.TextBoxExt txtLastName;
         internal System.Windows.Forms.Panel Panel2;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtTeacherID;
         internal System.Windows.Forms.Label Label7;
-        public Syncfusion.Windows.Forms.Tools.ComboBoxAdv cbUserRole;
-        internal Syncfusion.Windows.Forms.Tools.TextBoxExt txtPassword;
-        internal Syncfusion.Windows.Forms.Tools.TextBoxExt txtUsername;
-        internal Syncfusion.Windows.Forms.Tools.TextBoxExt txtTRole;
-        internal Syncfusion.Windows.Forms.Tools.TextBoxExt txtFirstName;
         private Syncfusion.Windows.Forms.ButtonAdv btnCancle;
         private Syncfusion.Windows.Forms.ButtonAdv btnSave;
         internal System.Windows.Forms.Label Label5;
@@ -450,5 +474,14 @@ namespace StudentAffairs.formData {
         private Syncfusion.Windows.Forms.Tools.CheckBoxAdv ckbGeneratePwd;
         private Syncfusion.Windows.Forms.Tools.CheckBoxAdv ckbShowPwd;
         private Syncfusion.Windows.Forms.ButtonAdv btnReset;
+        private Syncfusion.Windows.Forms.ButtonAdv btnDelete;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        public Syncfusion.Windows.Forms.Tools.TextBoxExt txtLastName;
+        public Syncfusion.Windows.Forms.Tools.TextBoxExt txtTeacherID;
+        public Syncfusion.Windows.Forms.Tools.TextBoxExt txtPassword;
+        public Syncfusion.Windows.Forms.Tools.TextBoxExt txtUsername;
+        public Syncfusion.Windows.Forms.Tools.TextBoxExt txtTRole;
+        public Syncfusion.Windows.Forms.Tools.TextBoxExt txtFirstName;
+        public Syncfusion.Windows.Forms.Tools.ComboBoxAdv cbUserRole;
     }
 }
